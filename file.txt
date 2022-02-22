@@ -1,0 +1,28 @@
+i am working on git and github today
+
+		 LaunchBrowser("chrome");
+		 driver.get("https://demoqa.com/browser-windows");
+		 driver.manage().window().maximize();
+		 String parentwindow = driver.getWindowHandle();
+		 driver.findElement(By.id("windowButton")).click();
+		 System.out.println("parent window address "+" "+parentwindow);
+		 Set<String> childWindowAddress = driver.getWindowHandles();
+		 
+		 System.out.println(childWindowAddress); //[CDwindow-0907EB1EE59DA86EE839E84FF41EEF5A, CDwindow-4964D5A5CFEF9F1793BC38946E658EBB]
+		 
+		 Iterator<String> iter = childWindowAddress.iterator();
+		 while(iter.hasNext()) {
+			 String childWindow = iter.next();//0907EB1EE59DA86EE839E84FF41EEF5A
+			 System.out.println(childWindow);
+			 if(!parentwindow.equalsIgnoreCase(childWindow)) {
+				driver.switchTo().window(childWindow);
+				 
+				 String Result = driver.findElement(By.id("sampleHeading")).getText();
+				 System.out.println(Result);
+				 
+				 driver.switchTo().window(parentwindow);	 
+				 driver.findElement(By.id("tabButton")).click();
+				 		 
+			 } 
+		 }
+		 
